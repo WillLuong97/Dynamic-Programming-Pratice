@@ -56,30 +56,99 @@ def find_fibonacci_BOTTOM_UP(n):
 
     return bottom_up[n]
 
-#main function to execute the array: 
-# def main():
-#     print("**Function to test the Fibonacci number ***")
-#     print("**Approach 1: With Recursion")
-#     x = 1 
-#     y = 2
-#     z = 35
-
-#     print(find_fibonacci_RECURSION(x))
-#     print(find_fibonacci_RECURSION(y))
-#     print(find_fibonacci_RECURSION(z))
 
 
-#     print("**Approach 2: With Memoization")
-#     print(fib_memo(x))
-#     print(fib_memo(y))
-#     print(fib_memo(z))
+#LEETCODE #62: Unique Path: 
+#A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+#The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
 
-#     print("**Approach 3: With Bottom Up")
-#     print(find_fibonacci_BOTTOM_UP(x))
-#     print(find_fibonacci_BOTTOM_UP(y))
-#     print(find_fibonacci_BOTTOM_UP(z))
+# Input: m = 3, n = 2
+# Output: 3
+# Explanation:
+# From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+# 1. Right -> Right -> Down
+# 2. Right -> Down -> Right
+# 3. Down -> Right -> Right
 
-# main()
+# Input: m = 7, n = 3
+# Output: 28
+
+#Approach 1: using recursion
+def uniquePath_RECURSION(m: int, n: int) -> int:
+    return total_unique_path(m - 1, n-1)
+
+
+#Helper method to contain the total unique path:
+def total_unique_path(m: int, n:int) -> int:
+    #if there is only one way to get to the current spot
+    if (m == 0 and n == 0):
+        return 1
+    
+    #invalid path
+    if (m < 0 or n <0):
+        return 0
+    
+    #final path: 
+    return total_unique_path(m-1, n) + total_unique_path(m, n - 1)
+
+    
+# #Approach 2: Using Memoization: 
+# def uniquePath_MEMOIZAITON(m: int, n: int) -> int:
+#     #dictionary to store the already computed recursive value
+#     repeated_val_dict = {}
+
+#     return total_unique_path(m - 1, n - 1, repeated_val_dict)
+
+
+# #Helper method 2 to contain the total unique path with a dictionary to store repeated values
+# def total_unique_path_MEMOIZATION(m, n, repeated_dict):
+
+#     if (m == 0 and n == 0):
+#         return 1
+
+#     #Invalid path: 
+#     if(m < 0 or n < 0):
+#         return 0
+
+#     #checking if m and n has already been computed
+#     if (repeated_dict[m] == n):
+#         return repeated_dict[m]
+
+#     return repeated_dict 
+
+#Approach 3: Using Bottom up method
+def uniquePath_BottomUp(m: int, n: int) -> int:
+    #create a two day array to store the values
+    calculated_path_array = [[0 for x in range(m + 1)] for y in range(n + 1)]
+   
+    #Loop through the 2d array and add the calculated path into it:
+    for i in range(len(calculated_path_array)):
+        for j in range(len(calculated_path_array[i])):
+            #if there are only one way to get to a spot on the graph
+            if (i == 0 or j == 0):
+                calculated_path_array[i][j] = 1
+            else:
+                calculated_path_array[i][j] = calculated_path_array[i-1][j] + calculated_path_array[i][j-1]
+               
+    
+    #return the last element in the 2d array to see how many path to get to it.
+    return calculated_path_array[m-1][n-1]
+
+
+#main function to execute the function: 
+def main():
+    print("**Testing out Unique_path with recursion**")
+    m = 3
+    n = 2
+    print(uniquePath_RECURSION(m, n))
+    print(uniquePath_RECURSION(7, 3))
+    print("**Testing out Bottom_UP method")
+    print(uniquePath_BottomUp(m, n))
+    print(uniquePath_RECURSION(7, 3))
+
+
+
+main()
 
 
 
