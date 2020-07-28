@@ -131,7 +131,45 @@ class Dynamic_Programming_Cases(unittest.TestCase):
         #assertion
         self.assertEqual(result, desired_value)
 
+class Testing_For_Unique_Path_Algorithm(unittest.TestCase):
+    def test_unique_path_RECURSION_3_2(self):
+        test_row_value = 3
+        test_column_value = 2
+        desired_result = 3
+        result = DynamicProgramming.uniquePath_RECURSION(test_row_value, test_column_value)
 
+        #assertion checks: 
+        self.assertEqual(result, desired_result)
+
+    def test_unique_path_RECURSION_7_3(self):
+        test_column_value = 7
+        test_row_value = 3
+        desired_result = 28
+        result = DynamicProgramming.uniquePath_RECURSION(test_column_value, test_row_value)
+
+        #assertion check: 
+        self.assertEqual(desired_result, result)
+
+    def test_unique_path_Bottom_Up_3_2(self):
+        test_column_value = 3
+        test_row_value = 2  
+        desired_result = 3
+        result = DynamicProgramming.uniquePath_BottomUp(test_column_value, test_row_value)
+
+        #assertion check: 
+        self.assertEqual(desired_result, result)
+
+    def test_unique_path_Bottom_Up_7_3(self):
+        test_column_value = 7
+        test_row_value = 3
+        desired_result = 28
+
+        result = DynamicProgramming.uniquePath_BottomUp(test_column_value, test_row_value)
+
+        #assertion check: 
+        self.assertEqual(desired_result, result)
+
+    
 
 if __name__ == "__main__":
     unittest.main()

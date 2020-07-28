@@ -144,7 +144,8 @@ def main():
     print(uniquePath_RECURSION(7, 3))
     print("**Testing out Bottom_UP method")
     print(uniquePath_BottomUp(m, n))
-    print(uniquePath_RECURSION(7, 3))
+    print(uniquePath_BottomUp(7, 3))
+    print(uniquePath_BottomUp(7,4))
 
 
 
