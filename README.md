@@ -4,12 +4,12 @@
 
 - In genearal, algorithm is an optimziation over plain recusion. The ided is to simply store the result of subproblems, so that we do not have to recompute them when needed later.
 
-### Overalapping Subproblems
+### Overalapping Subproblems:
 
-#### Optimal Substructure Property: 
+### Optimal Substructure Property: 
 
 
-#### How to solve a Dynamic Programming Problem: 
+### How to solve a Dynamic Programming Problem: 
 - Dynamic Programming (DP) aims to solve problem on polynomial time (n^k) from exponential time (2^n, etc.)
 
 Steps to solve a DP: 
