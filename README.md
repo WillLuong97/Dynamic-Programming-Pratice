@@ -6,7 +6,7 @@
 
 ### Overalapping Subproblems
 
-# Optimal Substructure Property: 
+#### Optimal Substructure Property: 
 
 
 # How to solve a Dynamic Programming Problem: 
