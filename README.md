@@ -6,10 +6,10 @@
 
 ### Overalapping Subproblems
 
-### Optimal Substructure Property: 
+# Optimal Substructure Property: 
 
 
-### How to solve a Dynamic Programming Problem: 
+# How to solve a Dynamic Programming Problem: 
 - Dynamic Programming (DP) aims to solve problem on polynomial time (n^k) from exponential time (2^n, etc.)
 
 Steps to solve a DP: 
