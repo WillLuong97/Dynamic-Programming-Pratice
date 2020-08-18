@@ -135,18 +135,93 @@ def uniquePath_BottomUp(m: int, n: int) -> int:
     return calculated_path_array[m-1][n-1]
 
 
-#main function to execute the function: 
-def main():
-    print("**Testing out Unique_path with recursion**")
-    m = 3
-    n = 2
-    print(uniquePath_RECURSION(m, n))
-    print(uniquePath_RECURSION(7, 3))
-    print("**Testing out Bottom_UP method")
-    print(uniquePath_BottomUp(m, n))
-    print(uniquePath_BottomUp(7, 3))
-    print(uniquePath_BottomUp(7,4))
+#UGLY NUMBERS:
+# Bruteforce approach:  Loop for all positive integers until the ugly number count is smaller than n, if an integer is ugly than increment ugly integer number count
+#To check if a number is ugly, divide the number by greatest divisible powers of 2, 3 and 5, if the number becomes 1 then it is an ugly number otherwise not.
+#This approach is taking too much time to compute but the space complexity is O(1)
+#Helper method to divide the number by a the prime greatest divisible power of b:
+def maxDivides(a,b):
+    if(a % b == 0):
+        a = a / b
 
+    return a #this should return 1 if the number is ugly
+    
+#function to check if the number being passed in is ugly or not
+def isUglyNumeber(a):
+    if((maxDivides(a, 2) == 1) and ((maxDivides(a, 3) == 1) and (maxDivides(a, 5)) == 1)):
+        return True
+
+    return False
+
+def uglyNumber_BRUTEFORCE(n):
+    i = 1
+    uglyNumberCounter = 1
+    while n > uglyNumberCounter:
+        i += 1
+        if(isUglyNumeber(i)):
+            uglyNumberCounter += 1
+
+    return uglyNumberCounter
+        
+    
+
+#Approach 2: Dynamic Programming
+# Time complexity: O(n) 
+# Space complexity: O(n)
+def uglyNumber_TOPDOWN(n):
+    #create an array that would store all the ugly number element
+    #base case
+    ugly_array = [0] * n #intialize the new array with the same size as n
+    ugly_array[0] = 1
+    i2 = i3 = i5 = 0
+    next_multiple_2 = 2
+    next_multipl_3 = 3
+    next_multiple_5 = 5
+ 
+    #loop through the array to find any ugly number created by 2, 3 or 5
+    for i in range(1, n):
+        #choose the min values of all the available multiples
+        ugly_array[i] = min(next_multiple_2, next_multipl_3, next_multiple_5)
+        #increment the value of all the available multiples
+        if ugly_array[i] == next_multiple_2:
+            i2 += 1
+            next_multiple_2 = 2 * ugly_array[i2]
+
+        if(ugly_array[i] == next_multipl_3):
+            i3 += 1
+            next_multipl_3 = 3 * ugly_array[i3]
+
+        if(ugly_array[i] == next_multiple_5):
+            i5 += 1
+            next_multiple_5 = 5 * ugly_array[i5]
+
+    #return the last element in the ugly number array
+    return ugly_array[-1]
+
+
+
+
+
+
+
+
+
+# #main function to execute the function: 
+def main():
+    # print("**Testing out Unique_path with recursion**")
+    # m = 3
+    # n = 2
+    # print(uniquePath_RECURSION(m, n))
+    # print(uniquePath_RECURSION(7, 3))
+    # print("**Testing out Bottom_UP method")
+    # print(uniquePath_BottomUp(m, n))
+    # print(uniquePath_BottomUp(7, 3))
+    # print(uniquePath_BottomUp(7,4))
+
+    print("***Testing the Ugly Numbers***")
+    n = 7
+    print("The ugly number at the nth element is: ")
+    print(uglyNumber_TOPDOWN(n))
 
 
 main()
