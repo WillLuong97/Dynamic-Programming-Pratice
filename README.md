@@ -1,6 +1,6 @@
-## Dynamic Programming
+# Dynamic Programming
 
-### Definition:
+## Definition:
 
 - In genearal, algorithm is an optimziation over plain recusion. The ided is to simply store the result of subproblems, so that we do not have to recompute them when needed later.
 
@@ -9,10 +9,10 @@
 ### Optimal Substructure Property: 
 
 
-### How to solve a Dynamic Programming Problem: 
+## How to solve a Dynamic Programming Problem: 
 - Dynamic Programming (DP) aims to solve problem on polynomial time (n^k) from exponential time (2^n, etc.)
 
-Steps to solve a DP: 
+### Steps to solve a DP: 
 1. Check if it is a DP problem 
 2. Decide a state expression with least parameters 
 3. Formulate state relationship
@@ -111,6 +111,75 @@ Steps to solve a DP:
 
 
 ### Basic Concepts: 
-
+- Recursion
 - Tabulation: Bottom Up
 - Memoization: Top Down
+
+
+
+
+## Sample Problems: 
+
+### Ugly Number: 
+
+Problem Statement: 
+
+```
+Ugly numbers are numbers whose only prime factors are 2, 3 or 5. The sequence 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, … shows the first 11 ugly numbers. By convention, 1 is included.
+
+Given a number n, the task is to find n’th Ugly number.
+
+
+```
+
+Dynamic Programming Approach: 
+
+The ugly-number sequence is 1,2,3,4,5,6,8,10,12,15, ... because the number can only be divided by 2,3,5, one way to look at the sequence is to split the sequence to three group as below: 
+(1) 1×2, 2×2, 3×2, 4×2, 5×2, …
+(2) 1×3, 2×3, 3×3, 4×3, 5×3, …
+(3) 1×5, 2×5, 3×5, 4×5, 5×5, …
+
+Algorithm:
+
+```
+1. Declare an array for ugly numbers: ugly[n] with its size being equal to the nth element
+2. Initialize the first ugly number: ugly[0] = 1
+3. Initialize three array index variables i2, i3, i5 to point to the 1st element in the array: i2 = i3 = i5 = 0
+4. Initialize 3 choices for the next ugly number: 
+next_multiple_of_2 = ugly[i2] * 2
+next_multiple_of_3 = ugly[i3] * 3
+next_multiple_of_5 = ugly[i5] * 5
+
+5. Now go in a loop to fill out all of the ugly numbers until 150
+For(i = 1; i < 150; i++){
+    next_ugly_no  = Min(next_mulitple_of_2,
+                        next_mulitple_of_3,
+                        next_mulitple_of_5); 
+
+    ugly[i] =  next_ugly_no       
+
+    if (next_ugly_no  == next_mulitple_of_2) 
+    {             
+        i2 = i2 + 1;        
+        next_mulitple_of_2 = ugly[i2]*2;
+    } 
+    if (next_ugly_no  == next_mulitple_of_3) 
+    {             
+        i3 = i3 + 1;        
+        next_mulitple_of_3 = ugly[i3]*3;
+     }            
+     if (next_ugly_no  == next_mulitple_of_5)
+     {    
+        i5 = i5 + 1;        
+        next_mulitple_of_5 = ugly[i5]*5;
+     } 
+     
+}/* end of for loop */ 
+
+}
+6.return next_ugly_nos
+```
+
+
+
+
