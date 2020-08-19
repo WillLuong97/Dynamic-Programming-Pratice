@@ -219,7 +219,7 @@ def main():
     # print(uniquePath_BottomUp(7,4))
 
     print("***Testing the Ugly Numbers***")
-    n = 7
+    n = 14
     print("The ugly number at the nth element is: ")
     print(uglyNumber_TOPDOWN(n))
 
