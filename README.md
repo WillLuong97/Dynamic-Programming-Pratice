@@ -18,6 +18,12 @@
 3. Formulate state relationship
 4. Do tabulation (or add memoization)
 
+### Tips and tricks to solve a Dynamic Programming Problem: 
+1. Start with a recursive backtracking solution 
+2. Optimize it by using a memoization table (top-down dynamic programming)
+3. Remove the need for a recursion (bottom-up dynamic programming)
+4. Apply final tricks to reduce the time/memorary complexity
+
 
 + Step 1: How to determine if a problem is a Dynamic Progarmming Problem? 
     - Problems that require maximize and minimize certain quantity or counting problems that ask to count the arrangement 
