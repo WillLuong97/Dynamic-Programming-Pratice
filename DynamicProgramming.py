@@ -200,7 +200,58 @@ def uglyNumber_TOPDOWN(n):
 
 
 
+'''
+Leetcode 91: Decode ways
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
 
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+Given a non-empty string containing only digits, determine the total number of ways to decode it.
+
+Example 1:
+
+Input: "12"
+Output: 2
+Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+Example 2:
+
+Input: "226"
+Output: 3
+Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+
+
+'''
+def numDecoding(s):
+    return helper(s)
+
+
+#This function will return the integer values of th
+def validNum(word):
+    return 1 <= int(word) <= 26
+
+#helper fucnction to recurse the algorithm: 
+def helper(word):
+    #base case:
+    if word and word[0] == "0":
+        return 0
+
+    if len(word) == 1:
+        return 1 if validNum(word) else 0
+
+    if len(word) == 2: 
+        if validNum(word):
+            return 2 if word[1] != 0 else 0
+
+        return 1 if word[1] != 0 else 0 #we currently do not have the element to represent a 0
+    res = 0
+    if validNum(word[:2]):
+        res = helper(word[2:])
+
+    return res + helper(word[1:])
+
+    
 
 
 
@@ -218,10 +269,21 @@ def main():
     # print(uniquePath_BottomUp(7, 3))
     # print(uniquePath_BottomUp(7,4))
 
-    print("***Testing the Ugly Numbers***")
-    n = 14
-    print("The ugly number at the nth element is: ")
-    print(uglyNumber_TOPDOWN(n))
+    # print("***Testing the Ugly Numbers***")
+    # n = 14
+    # print("The ugly number at the nth element is: ")
+    # print(uglyNumber_TOPDOWN(n))
+
+    #Testing number of ways to decode 
+    test_1 = "12"
+    test_2 = "226"
+    
+
+    print("TESTING DECODE WAYS...")
+    print(numDecoding(test_1))
+    print(numDecoding(test_2))
+
+    print("END OF PROGRAM...")
 
 
 main()
