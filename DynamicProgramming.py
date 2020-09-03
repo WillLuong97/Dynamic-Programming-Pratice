@@ -251,7 +251,7 @@ def helper(word):
 
     return res + helper(word[1:])
 
-    
+
 
 
 
@@ -275,13 +275,13 @@ def main():
     # print(uglyNumber_TOPDOWN(n))
 
     #Testing number of ways to decode 
-    test_1 = "12"
-    test_2 = "226"
+    test_1 = "10"
+    # test_2 = "226"
     
 
     print("TESTING DECODE WAYS...")
     print(numDecoding(test_1))
-    print(numDecoding(test_2))
+    # print(numDecoding(test_2))
 
     print("END OF PROGRAM...")
 
