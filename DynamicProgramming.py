@@ -253,6 +253,81 @@ def helper(word):
 
 
 
+#Leetcode 91 Decode Way: 
+
+#Problem statement: 
+'''
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+Given a non-empty string containing only digits, determine the total number of ways to decode it.
+
+Example 1:
+
+Input: "12"
+Output: 2
+Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+Example 2:
+
+Input: "226"
+Output: 3
+Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+
+'''
+
+#The problem is not look at which number make which letter like we see, but instead, we will use the letter as
+#conditions and only count the string that are valid to us. To solve this problem, will slice the input string and 
+#compare each element with the conditions we set out. 
+#Conditions: Let say L is a two digit number and slice it into L1 and L2. 
+#1. L1 != 0 because we do not have a 0 at the begining of the string
+#2. 0 < L1 < 26 and 0 <= L2 < 26, because the valid number are from 1 to 26 with L2 can be 0 as we have number like
+#10 and 20. 
+#3. If the number are larger than 2 digits than it would be broken down in conjunction like L1L2 L3 or L1, L2, L3 or L1, L2L3, ETC. and each of these slices 
+#will be checked with the above conditions
+
+#Algorithm: 
+'''
+We will solve this problem using Dynamic Programming, we know this is a dynamic programming problem because 
+it is asking us to count the occurence based on unqiue conditions
+
+step 1: Create a top-down table to memoize the value has been counted to optimized the dp algorithm
+step 2: set up base case: if L1 == 0, return 0 count, if len(inputString) == 0: return 1, all of the slices we have sastify the condition so far, so we return 1
+step 3: set up recursion, pass in the rest of string remained after each the slices (applicable for string length of 2). For string length that > 2, we will first have to check if the any of the pair slices 
+are greater than 26, if so, break out, if not, continue the recursion
+step 4:  return the result.
+'''
+#function to implement the above algorithm
+def numDecoding(num):
+    #recursive call: 
+    return recursion(num, {})
+
+#helper method to recursive the condition
+def recursion(s, memo):
+    #set up the base case: 
+    if not s:   #we have looked throught the first set of slices and to make it here, all the slices passed the conditions
+        return 1
+
+    #check if the first element in the string is 0 or not
+    if s[0] == "0":
+        return 0 #no number to sastify this
+
+    #if the string is already in the memo table, then return it
+    if s in memo:
+        return memo[s]
+
+    #set up recursion
+    result = 0
+    result += recursion(s[1:], memo)
+
+    #special case: the number is not 2 digits
+    if len(s) >= 2: 
+        if int(s[0:2]) <= 26:
+            result += recursion(s[2:], memo)
+
+    memo[s] = result
+    return memo[s]
 
 
 
@@ -276,12 +351,12 @@ def main():
 
     #Testing number of ways to decode 
     test_1 = "10"
-    # test_2 = "226"
+    test_2 = "226"
     
 
     print("TESTING DECODE WAYS...")
     print(numDecoding(test_1))
-    # print(numDecoding(test_2))
+    print(numDecoding(test_2))
 
     print("END OF PROGRAM...")
 
