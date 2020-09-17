@@ -330,7 +330,43 @@ def recursion(s, memo):
     return memo[s]
 
 
+#Leetcode 96: Unique Binary Search Tree
 
+#Problem statement: 
+'''
+Given n, how many structurally unique BST's (binary search trees) that store values 1 ... n?
+
+Example:
+
+Input: 3
+Output: 5
+Explanation:
+Given n = 3, there are a total of 5 unique BST's:
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+
+'''
+def numTree(n):
+    #create an array that would store 1,..,n
+    nList = [1] * (n+1)
+    #Loop through each n starting out from 2 to check for the number of tree each element can create
+    for node in range(2, n+1):
+        total = 0
+        #each element in n will take turn and become the root
+        for root in range(1, node+1):
+            #finding the left and right node
+            leftSubTree = root - 1
+            rightSubTree = node - root
+            #finding the total number BST that these node can find
+            total += nList[leftSubTree] * nList[rightSubTree]
+
+        nList[node] = total
+
+    return nList[n]
 
 # #main function to execute the function: 
 def main():
@@ -350,15 +386,20 @@ def main():
     # print(uglyNumber_TOPDOWN(n))
 
     #Testing number of ways to decode 
-    test_1 = "10"
-    test_2 = "226"
+    # test_1 = "10"
+    # test_2 = "226"
     
 
-    print("TESTING DECODE WAYS...")
-    print(numDecoding(test_1))
-    print(numDecoding(test_2))
+    # print("TESTING DECODE WAYS...")
+    # print(numDecoding(test_1))
+    # print(numDecoding(test_2))
 
-    print("END OF PROGRAM...")
+    # print("END OF PROGRAM...")
+
+    print("TESTING NUMBER OF BINARY TREE...")
+    test_val = 3
+    print(numTree(test_val))
+    print("END OF TESTING...")
 
 
 main()
