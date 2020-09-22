@@ -392,6 +392,78 @@ def factorial_TOPDOWN(num):
     return num * factorial_TOPDOWN(num - 1)
 
 
+# Leetcode 95: Unique Binary Search Tree II
+
+#Problem statement:
+'''
+Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1 ... n.
+
+Example:
+
+Input: 3
+Output:
+[
+  [1,null,3,2],
+  [3,2,null,1],
+  [3,1,null,null,2],
+  [2,1,3],
+  [1,null,2,null,3]
+]
+Explanation:
+The above output corresponds to the 5 unique BST's shown below:
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+ 
+
+Constraints:
+
+0 <= n <= 8
+'''
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.root = value
+        self.left = left
+        self.right = right
+
+#function to generate binary tree from a given n, we will recursive dynamic programming approach
+def generateTrees(n):
+    
+    #Checking for the validity of the number being passed in
+    if n < 0 or n > 8:
+        return None
+    #base case: 
+    if n == 0:
+        return None
+
+    return recursion(1, n+1)
+
+#helper method to recursively check all element until n
+def recursion(root, end):
+    answer = []
+    #base case: 
+    if root > end:
+        return None
+    for i in range(root, end):
+        #we will find the left and right subtree of the root value
+        left = recursion(i - 1, root)
+        right = recursion(i + 1, end)
+
+        #we wilk construct the tree node from the root, left and right node
+        for l in left: 
+            for r in right:
+                node = TreeNode(i)
+                node.left = l 
+                node.right = r
+
+            answer.append(node)
+    return answer
+
+
+
 # #main function to execute the function: 
 def main():
     # print("**Testing out Unique_path with recursion**")
