@@ -4,9 +4,6 @@
 
 - In genearal, algorithm is an optimziation over plain recusion. The ided is to simply store the result of subproblems, so that we do not have to recompute them when needed later.
 
-### Overalapping Subproblems:
-
-### Optimal Substructure Property: 
 
 
 ## How to solve a Dynamic Programming Problem: 
@@ -116,12 +113,21 @@
     => Source code for this problem in Python: 
 
 
-### Basic Concepts: 
+## Basic Concepts: 
+
 - Recursion
+
 - Tabulation: Bottom Up
+
+    + Let’s describe a state for our DP problem to be dp[x] with dp[0] as base state and dp[n] as our destination state. So,  we need to find the value of destination state i.e dp[n].
+    
+   +  If we start our transition from our base state i.e dp[0] and follow our state transition relation to reach our destination state dp[n], we call it Bottom Up approach as it is quite clear that we started our transition from the bottom base state and reached the top most desired state.
+   
 - Memoization: Top Down
 
-
+    + If we need to find the value for some state say dp[n] and instead of starting from the base state that i.e dp[0] we ask our answer from the states that can reach the destination state dp[n] following the state transition relation, then it is the top-down fashion of DP.
+    
+    + Here, we start our journey from the top most destination state and compute its answer by taking in count the values of states that can reach the destination state, till we reach the bottom most base state.
 
 
 ## Sample Problems: 
