@@ -369,12 +369,27 @@ def numTree(n):
     return nList[n]
 
 
-#Dynamic programming example bottom-up method implementattion
+#Basic program to find the factorial of a number
+#6! = 1 * 2 * 3 * 4 * 5 * 6 = 720
+#Dynamic programming example bottom-up method implementattion/iterative method
+def factorial_BOTTOMUP(num):
+    
+    dp = [None] * (num + 1)
+    #base case: 
+    dp[0] = 1
+    #loop through the dp array and add element into it
+    for i in range(1, len(dp)):
+        dp[i] = dp[i-1] * i
+    return dp[num]
 
 
+#Dynamic programming example top-down method implementattion/recursive method
+def factorial_TOPDOWN(num):
+    #base case: 
+    if num == 0:
+        return 1
 
-#Dynamic programming example top-down method implementattion
-
+    return num * factorial_TOPDOWN(num - 1)
 
 
 # #main function to execute the function: 
@@ -408,7 +423,18 @@ def main():
     print("TESTING NUMBER OF BINARY TREE...")
     test_val = 3
     print(numTree(test_val))
+
+    print("")
+    print("TESTING FACTORIAL FOR BOTTOM UP...")
+    test_num = 6
+    print(factorial_BOTTOMUP(test_num))
+
+    print("")
+    print("TESTING FACTORIAL FOR TOP DOWN...")
+    print(factorial_TOPDOWN(test_num))
     print("END OF TESTING...")
+
+
 
 
 main()
