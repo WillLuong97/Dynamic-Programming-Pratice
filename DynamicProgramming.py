@@ -368,6 +368,15 @@ def numTree(n):
 
     return nList[n]
 
+
+#Dynamic programming example bottom-up method implementattion
+
+
+
+#Dynamic programming example top-down method implementattion
+
+
+
 # #main function to execute the function: 
 def main():
     # print("**Testing out Unique_path with recursion**")
