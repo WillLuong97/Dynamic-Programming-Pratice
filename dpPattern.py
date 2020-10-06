@@ -37,6 +37,51 @@ def minCostClimbingStairs(cost):
         
     return min(p1, p2)
 
+
+#***********************LEETCODE 64. Minimum Path Sum***************************
+'''
+Problem statement: 
+Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+
+Note: You can only move either down or right at any point in time.
+
+Example:
+
+Input:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+Output: 7
+Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+
+'''
+#Time complexity: O(mxn) where m and n are the dimesion of the given grid
+#Space complexity:  O(1) we only work the given grid, thus, not needing any extra spaces.
+def minPathSum(grid):
+    #base case: 
+    if not grid: 
+        return None
+    #extract the number of row and column of the grid
+    numOfRow = len(grid[0])
+    numOfcolumn = len(grid)
+    
+    #calculate the sum of the outer column
+    for i in range(1, numOfcolumn):
+        grid[i][0] += grid[i-1][0]
+
+    for j in range(1, numOfRow):
+        grid[0][j] += grid[0][j-1]
+
+    #the total sum of the rest of the matrix as we loop through them
+    #internal node
+    for i in range(1, numOfcolumn):
+        for j in range(1, numOfRow):
+            grid[i][j] += min(grid[i][j-1], grid[i-1][j])
+
+    return grid[-1][-1]
+
 #main function to excute different implementation
 def main():
     print("TESTING MIN COST CLIMBING STAIRS...")
@@ -44,5 +89,19 @@ def main():
     testCost01 = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
     print(minCostClimbingStairs(testCost))
     print(minCostClimbingStairs(testCost01))
+
+    print("END OF TESTING...")
+
+    print("")
+    print("TESTING MINIMUN PATH SUM...")
+    grid = [
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+    print(minPathSum(grid))
+    print("END OF TESTING...")
+
+    print("")
 
 main()
