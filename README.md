@@ -192,6 +192,39 @@ For(i = 1; i < 150; i++){
 6.return next_ugly_nos
 ```
 
+## Dynamic Programming Problem Pattern: 
+
+- Minimum (Maximum) Path to reach a Target:
+    
+    + Statement: Given a target find minimum (maximum) cost / path / sum to reach the target.
+    
+    + Approach: Choose the minimum (maximum) path among all possible paths before the current state, then add the value for the current state.
+    
+            routes[i] = min(routes[i-1], routes[i-2], ... , routes[i-k]) + cost[i]
+            
+    + Optimal solutions for all values in the target and return all the value for the target
+
+```
+for (int i = 1; i <= target; ++i) {
+   for (int j = 0; j < ways.size(); ++j) {
+       if (ways[j] <= i) {
+           dp[i] = min(dp[i], dp[i - ways[j]] + cost / path / sum) ;
+       }
+   }
+}
+ 
+return dp[target]
+
+```
+    
+- Distinct Ways
+
+- Merging Intervals: 
+
+- DP on Strings
+
+- Decision Making
+
 
 
 
