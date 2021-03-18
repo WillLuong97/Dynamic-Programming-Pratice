@@ -1,5 +1,4 @@
 #Problem 1664. Ways to Make a Fair Array
-
 '''
 You are given an integer array nums. You can choose exactly one index (0-indexed) and remove the element. Notice that the index of the elements may change after the removal.
 
@@ -39,58 +38,47 @@ Constraints:
 1 <= nums.length <= 105
 1 <= nums[i] <= 104
 
-Approach: 
-- Select an index to remove
-- Find and compare the sum of both the odd and even indexed value
-- If it can return a fair array then we will count it as 1 times, then repeat the process until all index has been maxed out. 
-- Otherwise, skip it and repeat the process again but with the next index and until all index has been maxed out. 
+Approach:
+We are going to find the sum of all even number and odd number and assign them into two variable: evenSum and oddSUM. 
+Then we take turn remove each value out of the orignal list and check if evenSum and oddSum would still be equal to each other. 
+If they are both equal to each other, then increment the fair way by 1 and keep going.  
 '''
-import copy
 def waysToMakeFair(nums):
 	#base case:
 	if not nums: 
-		return 0
-	result = 0
-	#helper method to check the sum of odd and oven value index each time
-	def checkFairArray(index):
-		#base case: 
-		if index == None:
-			return 
-		odd_index_sum = 0
-		even_index_sum = 0
-		isFairArray = False
-#		print("check fair array index: ", index)
-		#remove the value at the current index: 
-		edited_nums = copy.deepcopy(nums)
-#		print(nums)
-		edited_nums.remove(edited_nums[index])
-		#finding the sum of odd and even index
-		for i in range(len(edited_nums)):
-			if i % 2 == 0: 
-				even_index_sum += edited_nums[i]
-			else: 
-				odd_index_sum += edited_nums[i]
-#		print("Odd Sum: ", odd_index_sum)
-#		print("Even Sum: ", even_index_sum)
+		return None
+	evenSum = 0 
+	oddSum = 0
+	j = 1	
+	# finding the sum of all odd and even number into different values
+	while j  < len(nums):
+		if j % 2 == 1:
+			oddSum += nums[j]
 
-		if even_index_sum == odd_index_sum: 
-			isFairArray = True
 		else: 
-			isFairArray = False
-		return isFairArray
-		
-	
-	#loop through the nums list and get extract each index for removal in the funcition
-	for i in range(len(nums)):
-		#print("Outside for-loop iterator: ", i)
-		#print(checkFairArray(i))
-		if checkFairArray(i):
-			result += 1
+			evenSum += nums[j]
+		j+= 1
+	#result variable 
+	count = 1 * (evenSum == oddSum) 
+	#loop through the list and take out each value and check if the 
+	#even sum and odd sum are still equal 
+	i = 1
+	while i <len(nums):
+		#if i is odd indexed: 
+		if i % 2 == 1:
+			#remove the index out of the sum and calculate the new sum
+			oddSum += nums[i-1] - nums[i]
+		else: 
+			evenSum += nums[i-1] - nums[i]	
+		i += 1 
+		count += (oddSum == evenSum)
+	return count
 
-	return result
-
-
-
+'''
+Time complexity: O(n), the alogorithm will have to run through all number in the array to find the sum for odd and even and then 
+remove one number each to check for ways that the two sum can be equal. 
+Space complexity: O(1), we are not storing anything beside the two sum variable.
+'''
 #Main function to run the test cases: 
 def main():
 	print("TESTING WAYS TO MAKE A FAIR ARRAY...")
